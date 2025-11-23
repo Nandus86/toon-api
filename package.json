@@ -1,0 +1,22 @@
+{
+  "name": "toon-converter-api",
+  "version": "1.0.0",
+  "description": "API para converter JSON para TOON format",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "@toon-format/toon": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

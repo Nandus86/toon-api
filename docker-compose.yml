@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  toon-api:
+    image: node:20-alpine
+    container_name: toon-converter-api
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - /path/to/your/code:/app
+    command: sh -c "npm install && node index.js"
+    restart: unless-stopped
+    networks:
+      - toon-network
+
+networks:
+  toon-network:
+    driver: bridge
