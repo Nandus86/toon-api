@@ -19,4 +19,4 @@ services:
 
 networks:
   n8n:
-    driver: bridge
+    external: true
