@@ -2,21 +2,15 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copiar package.json e package-lock.json
-COPY package*.json ./
+COPY package.json ./
+COPY package-lock.json ./
 
-# Instalar dependências
-RUN npm ci --only=production
+RUN apk add --no-cache python3 make g++ \
+    && npm ci --only=production \
+    && apk del python3 make g++
 
-# Copiar código da aplicação
-COPY index.js .
-
-# Expor porta
+COPY . .
 EXPOSE 3000
-
-# Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
-
-# Iniciar aplicação
+    CMD node -e "require('http').get('http://localhost:3000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 CMD ["node", "index.js"]
