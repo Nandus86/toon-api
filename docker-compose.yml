@@ -8,15 +8,15 @@ services:
     container_name: toon-converter-api
     working_dir: /app
     ports:
-      - "3000:3000"
+      - "3095:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
     command: node index.js 
     restart: unless-stopped
     networks:
-      - n8n
+      - network_public
 
 networks:
-  n8n:
+  network_public:
     external: true
